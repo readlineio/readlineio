@@ -1,3 +1,4 @@
+import sys
 import tornado.ioloop
 import tornado.web
 from collections import defaultdict
@@ -50,7 +51,10 @@ application = tornado.web.Application([
 ])
 
 if __name__ == "__main__":
-    port = 8888
+    if len(sys.argv) > 1:
+        port = int(sys.argv[1])
+    else:
+        port = 8888
     application.listen(port)
     print("Listening for connections on port {port}...".format(port=port))
     tornado.ioloop.IOLoop.current().start()
