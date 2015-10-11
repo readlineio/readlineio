@@ -1,0 +1,12 @@
+app starts running, and provides a new PAGEID
+app starts reading all incoming messages on /channel/PAGEID
+web creates a SESSIONID
+web connects to readline.io/PAGEID
+web sends "start" with SESSIONID
+app reads SESSIONID, and then sends the initial components to Firebase/SESSIONID
+app continues reading all incoming messages on /channel/PAGEID
+web sends follow-up messages
+
+Messages to "app":
+	{"start", session}
+	{"call", session, fnName, args, kwargs}

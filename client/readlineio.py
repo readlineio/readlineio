@@ -1,6 +1,7 @@
 from firebase import Firebase
 from channel import Channel
 import json
+import random
 
 key = None
 
@@ -110,8 +111,13 @@ def handle_message(message):
         print("The hell is this action:", action)
 
 
+def random_page_id(length=10):
+    chars = 'abcdefghijklmnopqrstuvwxyz'
+    return ''.join(random.choice(chars) for _ in range(length))
+
+
 def run():
-    page_id = 'index'
+    page_id = random_page_id()
     page_channel = Channel('http://readline.io', page_id)
     print("Access your application by going to http://readline.io/{}".format(page_id))
     while True:

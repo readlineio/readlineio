@@ -1,8 +1,8 @@
 import Firebase from 'firebase';
 import {EventEmitter} from 'events';
-import lodash from 'lodash';
+import _ from 'lodash';
+import uuid from 'uuid';
 
-let _ = lodash;
 
 // TODO: make this dynamic based on config
 let STAGE = 'development';
@@ -22,7 +22,7 @@ class PageStore {
 
   constructor(pageId) {
     this.pageId = pageId;
-    this.sessionId = 'sessssssionTODO';
+    this.sessionId = uuid.v4();
     this.pageEvents = new EventEmitter();
 
     this.makeStart();
