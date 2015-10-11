@@ -13,8 +13,11 @@ class Channel(object):
     def dequeue(self, timeout=50):
         # TODO: this needs to be able to handle multiplexing
         # possible use tornado async http / asyncio?
-        resp = requests.get(self.url, timeout=timeout)
-        if resp.status_code == 200:
+        try:
+            resp = requests.get(self.url, timeout=timeout)
+        except requests.exceptions.ReadTimeout:
+            return None
+        if resp.status_code == 200 and resp.text:
             return json.loads(resp.text)
         else:
             return None

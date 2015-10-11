@@ -13,9 +13,14 @@ class ChannelHandler(tornado.web.RequestHandler):
         # check if there's already a handler for this channel id
         # if so, then raise an error
         self.channel_id = channel_id
+        """
+        TODO: figure out how to recover from client disconnect --
+        otherwise you end up with infinite empty messages issue. Maybe
+        prompt user for how to handle?
         if CHANNEL_HANDLERS.get(self.channel_id):
             # TODO: raise error
             self.finish()
+        """
 
         # Check if there are any messages backed up.
         messages = CHANNEL_MESSAGES[self.channel_id]
@@ -51,6 +56,7 @@ application = tornado.web.Application([
 ])
 
 if __name__ == "__main__":
+    # TODO: Make better argparse version
     if len(sys.argv) > 1:
         port = int(sys.argv[1])
     else:
