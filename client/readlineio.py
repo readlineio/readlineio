@@ -2,6 +2,7 @@ from firebase import Firebase
 from channel import Channel
 import json
 import random
+import threading
 
 key = None
 
@@ -128,4 +129,6 @@ def run():
         else:
             print("No message received, continuing long poll.")
 
-
+def run_backgrounded():
+    readline_thread = threading.Thread(target=run, daemon=True)
+    readline_thread.start()
