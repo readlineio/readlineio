@@ -10,14 +10,22 @@ pip install -r requirements.txt
 Adding a new block
 ===
 
-Add a new block .jsx to web/client/components/blocks
+Add a new block `.jsx` file to `web/client/components/blocks`
 
-then modify components/ReadlineIOMain and add the block to
+When you are done, open `components/ReadlineIOMain` and add the new block to the top of the imports, e.g.:
 
-`import Input from 'components/blocks/Input.jsx';`
-`import Output from 'components/blocks/Output.jsx';`
-`import Choice from 'components/blocks/Choice.jsx';`
+```
+import Input from 'components/blocks/Input.jsx';
+import Output from 'components/blocks/Output.jsx';
+import Choice from 'components/blocks/Choice.jsx';
+import NewBlock from 'components/blocks/NewBlock.jsx';
+```
 
-and
+and add the new block also to this function:
 
-`renderItemInner(item)`
+```
+renderItemInner(item) {
+      ...
+      case 'newblock':
+        return (<NewBlock item={item} store={this.store} />);
+```
