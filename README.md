@@ -1,14 +1,20 @@
 # readlineio
 Frontends without servers
+===
 
+Installing the Python code
+---
+
+```
 brew install python3
 cd client
 virtualenv --python=python3 venv/
 source venv/bin/activate
 pip install -r requirements.txt
+```
 
 Adding a new block
-===
+---
 
 Add a new block `.jsx` file to `web/client/components/blocks`
 
