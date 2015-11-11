@@ -4,7 +4,11 @@ import readlineio as rio
 def example_input():
     rio.output('ReadlineIO example input')
     rio.output('Follow-up output')
-    rio.input('What is your name?').then(print_name)
+    rio.input('Give me a picture URL').then(print_image)
+
+def print_image(url):
+	rio.output("HERE IS YOUR IMAGE")
+	rio.output_image(url)
 
 def print_name(name):
     rio.output('Hello ' + name + '!')
