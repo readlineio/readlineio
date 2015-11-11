@@ -7,6 +7,7 @@ import threading
 key = None
 
 STAGE = 'development'
+server_name = 'localhost:3001'
 
 fbref = Firebase('https://flubstack.firebaseio.com/').child(STAGE)
 # TODO: hardcoded host parameter
@@ -77,11 +78,21 @@ def main(inner_f):
 
 def output(text):
     # Write something to the current session's firebase
-    sess = session()
-    message = {
+    send({
         'type': 'output',
         'text': text
-    }
+    })
+
+
+def output_image(url):
+    send({
+        'type': 'image',
+        'url': url
+    })
+
+
+def send(message):
+    sess = session()
     sess.send(message)
 
 
@@ -120,7 +131,7 @@ def random_page_id(length=10):
 def run():
     page_id = random_page_id()
     page_channel = Channel('http://readline.io', page_id)
-    print("Access your application by going to http://readline.io/{}".format(page_id))
+    print("Access your application by going to http://{}/{}".format(server_name, page_id))
     while True:
         message = page_channel.dequeue()
         if message:
@@ -128,6 +139,7 @@ def run():
             handle_message(message)
         else:
             print("No message received, continuing long poll.")
+
 
 def run_backgrounded():
     readline_thread = threading.Thread(target=run, daemon=True)
