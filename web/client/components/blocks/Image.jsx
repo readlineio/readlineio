@@ -6,7 +6,7 @@ let Image = Base.createBlock('image', {
   render() {
     return (
       <section className="block">
-        <img src={this.props.item.url}></img>
+        <img style={{width: "100%"}} src={this.props.item.url}></img>
       </section>
     );
   }
