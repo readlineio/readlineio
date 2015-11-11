@@ -1,7 +1,7 @@
 import React from 'react';
 import Base from 'components/blocks/Base.jsx';
 
-let Output = Base.createBlock({
+let Output = Base.createBlock('output', {
 
   render() {
     return (

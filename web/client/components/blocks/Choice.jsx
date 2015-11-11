@@ -1,7 +1,7 @@
 import React from 'react';
 import Base from 'components/blocks/Base.jsx';
 
-let Choice = Base.createBlock({
+let Choice = Base.createBlock('choice', {
 
   returnInput(value) {
     this.props.store.makeCall(this.props.item.callback, [value]);

@@ -1,10 +1,7 @@
 import React from 'react';
 import {PageStore} from 'helpers/storage.jsx';
-
-// TODO: auto-discovery here? this seems really messy
-import Input from 'components/blocks/Input.jsx';
-import Output from 'components/blocks/Output.jsx';
-import Choice from 'components/blocks/Choice.jsx';
+import Base from 'components/blocks/Base.jsx';
+import blockRegistry from 'components/blocks/blockRegistry.jsx';
 
 let ReadlineIOMain = React.createClass({
 
@@ -29,17 +26,13 @@ let ReadlineIOMain = React.createClass({
   },
 
   renderItemInner(item) {
-    switch (item.type) {
-      case 'output':
-        return (<Output item={item} store={this.store} />);
-      case 'input':
-        return (<Input item={item} store={this.store} />);
-      case 'choice':
-        return (<Choice item={item} store={this.store} />);
-      default:
-        return this.renderItemDefault(item);
+    let Factory = Base.blockRegistry[item.type];
+    if (!Factory) {
+      console.warn("Invalid block type:", item.type);
+      return this.renderItemDefault(item);
+    } else {
+      return (<Factory item={item} store={this.store} />);
     }
-    
   },
 
   renderItem(item) {

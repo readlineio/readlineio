@@ -1,7 +1,7 @@
 import React from 'react';
 import Base from 'components/blocks/Base.jsx';
 
-let Input = Base.createBlock({
+let Input = Base.createBlock('input', {
 
   getInitialState() {
     return {
